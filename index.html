@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Сибилевец | Современный язык на основе русского</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #20bfb0 0%, #0b4b8a 100%);
+            color: #1a2c3e;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        /* Анимация появления контента */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatSoft {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
+        @keyframes gentlePulse {
+            0% { box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+            50% { box-shadow: 0 12px 28px rgba(0,0,0,0.2); }
+            100% { box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* общий стиль секций */
+        section {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+            animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+            opacity: 0; /* старт анимации */
+            transform: translateY(24px);
+        }
+
+        /* каждая секция появляется с небольшой задержкой */
+        section:nth-child(1) { animation-delay: 0.05s; }
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.15s; }
+        section:nth-child(4) { animation-delay: 0.2s; }
+        section:nth-child(5) { animation-delay: 0.25s; }
+        section:nth-child(6) { animation-delay: 0.3s; }
+
+        /* заголовки */
+        h1, h2 {
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            background: linear-gradient(125deg, #0b3b5f, #0f2b3d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.75rem;
+            text-shadow: none;
+        }
+
+        .hero-sub {
+            font-size: 1.3rem;
+            color: #1e4a6b;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        /* статистика */
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0 0.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.2rem 2rem;
+            text-align: center;
+            min-width: 130px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            transition: transform 0.25s ease, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 28px -10px rgba(0,0,0,0.2);
+            background: #ffffff;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #188f8a, #0f5c7a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2c5a74;
+        }
+
+        /* три колонки (миссия и тд) */
+        .grid-3 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin-top: 1.8rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.6rem;
+            flex: 1;
+            min-width: 220px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 24px 36px -12px rgba(0,0,0,0.25);
+            background: #fefffe;
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .info-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: #115c6e;
+        }
+
+        /* особенности языка (две колонки) */
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.96);
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            flex: 1 1 260px;
+            transition: all 0.25s;
+            border-left: 6px solid #2c9c8f;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+        }
+
+        .feature-item:hover {
+            transform: translateX(6px) scale(1.01);
+            background: white;
+            border-left-color: #0e6b7c;
+            box-shadow: 0 15px 28px -8px rgba(0,0,0,0.15);
+        }
+
+        .feature-item h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            color: #0e5f6b;
+        }
+
+        .feature-item ul, .feature-item p {
+            margin-left: 1rem;
+            color: #2c3e44;
+        }
+
+        .feature-item li {
+            margin: 0.5rem 0;
+        }
+
+        /* кнопки и ссылки */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            color: #0f4c5f;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            background: #edf7f5;
+            box-shadow: 0 16px 24px -8px rgba(0,0,0,0.2);
+            border-color: #b7dfd8;
+        }
+
+        /* аккордеон FAQ */
+        .faq-item {
+            background: rgba(255,255,255,0.98);
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.6rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: #ffffffd9;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #eef6f3;
+        }
+
+        .faq-question span:first-child {
+            flex: 1;
+        }
+
+        .faq-toggle {
+            font-size: 1.8rem;
+            font-weight: 400;
+            transition: transform 0.2s;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.6rem;
+            background: #fafefd;
+            transition: max-height 0.4s cubic-bezier(0.33, 1, 0.68, 1), padding 0.2s;
+            border-top: 0px solid #cbe5e0;
+        }
+
+        .faq-answer.show {
+            max-height: 380px;
+            padding: 1rem 1.6rem 1.4rem;
+            border-top-width: 1px;
+            border-top-color: #cce3de;
+        }
+
+        .faq-answer p, .faq-answer ul {
+            margin: 0.7rem 0;
+            line-height: 1.45;
+            color: #1e4a5e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem 0 0;
+            color: #eefbff;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+            section {
+                padding: 1.4rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+            .feature-item h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* декоративная анимация градиента */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(125deg, #1ba392, #125f89);
+            animation: bgPulse 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes bgPulse {
+            0% {
+                background: linear-gradient(125deg, #1eb6a5, #0d4d7a);
+            }
+            100% {
+                background: linear-gradient(125deg, #17927f, #1d6c9c);
+            }
+        }
+
+        /* карточки сообщества */
+        .community-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .com-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.4rem 1.8rem;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            transition: all 0.25s;
+        }
+        .com-card:hover {
+            transform: scale(1.02) translateY(-5px);
+            background: #ffffff;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+        }
+        .com-icon {
+            font-size: 2.4rem;
+            display: block;
+        }
+        .com-card a {
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: inline-block;
+            color: #116b71;
+        }
+        .com-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="gradient-bg"></div>
+<div class="container">
+    <!-- hero секция (точное содержание) -->
+    <section>
+        <h1>Язык будущего</h1>
+        <div class="hero-sub">Простой, логичный, современный. Создан Тимофеем Сибилевым для лёгкого общения</div>
+        <div class="stats">
+            <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">правила грамматики</div></div>
+            <div class="stat-card"><div class="stat-number">31</div><div class="stat-label">букв в алфавите</div></div>
+            <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">минут на изучение</div></div>
+        </div>
+    </section>
+
+    <!-- О проекте -->
+    <section>
+        <h2>О проекте</h2>
+        <div class="grid-3">
+            <div class="info-card"><div class="card-icon">🎯</div><h3>Миссия</h3><p>Создать максимально простой и логичный язык для повседневного общения, доступный каждому</p></div>
+            <div class="info-card"><div class="card-icon">💡</div><h3>Философия</h3><p>"Пишем как слышим, думаем как говорим" — основа понятной и интуитивной коммуникации</p></div>
+            <div class="info-card"><div class="card-icon">🚀</div><h3>Достижения</h3><p>Первый в поиске Google, 100/100 скорость загрузки, профессиональная реализация</p></div>
+        </div>
+    </section>
+
+    <!-- Особенности языка -->
+    <section>
+        <h2>Особенности языка</h2>
+        <p style="margin-bottom: 0.8rem; font-weight: 500;">Что делает Сибилевец уникальным</p>
+        <div class="features-grid">
+            <div class="feature-item"><h3>✍️ Упрощённый алфавит</h3><p>31 буква, каждая обозначает один звук. Чёткое произношение без исключений.</p>
+                <ul><li>Звук [и] пишется как I</li><li>Звук [ɨ] пишется как И</li><li>Логичные замены сложных звуков</li></ul>
+            </div>
+            <div class="feature-item"><h3>📦 Отсутствие падежей</h3><p>Слова не меняются по падежам, родам и числам. Одна форма — навсегда</p>
+                <ul><li>Никаких склонений</li><li>Постоянная форма слов</li><li>Простота использования</li></ul>
+            </div>
+            <div class="feature-item"><h3>⚙️ Логичная грамматика</h3><p>Всего 3 основных правила, которые можно выучить за 5 минут</p>
+                <ul><li>Множественное число: "все"</li><li>Времена: "било"/"буду"</li><li>Предлоги вместо падежей</li></ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Присоединяйтесь -->
+    <section>
+        <h2>Присоединяйтесь к сообществу</h2>
+        <p style="margin-bottom: 1rem;">Станьте частью языковой революции</p>
+        <div class="community-cards">
+            <div class="com-card"><span class="com-icon">📚</span><h3>Изучайте</h3><p>Освойте язык за 5 минут с нашими материалами</p></div>
+            <div class="com-card"><span class="com-icon">💬</span><h3>Общайтесь</h3><p>Присоединяйтесь к Telegram-сообществу</p><a href="#" target="_blank">Перейти →</a></div>
+            <div class="com-card"><span class="com-icon">🎥</span><h3>Смотрите</h3><p>Обучающие видео на YouTube</p><a href="#" target="_blank">Перейти →</a></div>
+        </div>
+        <div class="btn-group">
+            <a href="#" class="btn">📢 Telegram-канал</a>
+            <a href="#" class="btn">▶️ YouTube-плейлист</a>
+        </div>
+        <!-- примечание: ссылки оставлены как # для сохранения структуры, можно заменить на реальные из оригинала (но в исходном коде не было прямых ссылок, просто надписи) 
+        согласно оригиналу: есть "Перейти" но без конкретных урлов, оставлю якоря чтобы сохранить функциональность кликабельности -->
+    </section>
+
+    <!-- FAQ полный -->
+    <section>
+        <h2>❓ Вопросы и ответы</h2>
+        <p>Всё, что вы хотели знать о Сибилевце</p>
+        <div style="margin-top: 1.4rem;" id="faq-container">
+            <div class="faq-item"><div class="faq-question"><span>Что такое Сибилевец?</span><span class="faq-toggle">+</span></div><div class="faq-answer"><p>Сибилевец — это упрощённый вариант русского языка, созданный для лёгкого общения. Он сохраняет основу русского, но убирает сложные грамматические правила.</p></div></div>
+            <div class="faq-item"><div class="faq-question"><span>Чем Сибилевец отличается от русского?</span><span class="faq-toggle">+</span></div><div class="faq-answer"><p>Основные отличия:</p><ul><li>Нет падежей и спряжений</li><li>31 буква с чёткими звуками</li><li>3 простых правила грамматики</li><li>Слова не меняются</li></ul></div></div>
+            <div class="faq-item"><div class="faq-question"><span>Почему в алфавите есть латинская I?</span><span class="faq-toggle">+</span></div><div class="faq-answer"><p>Для чистоты принципа "пишем как слышим":</p><ul><li>I (латиница) — звук [и] как в "мир"</li><li>И (кириллица) — звук [ɨ] как в "мышь"</li></ul><p>Так каждый звук получает свою уникальную букву.</p></div></div>
+            <div class="faq-item"><div class="faq-question"><span>Кто может использовать Сибилевец?</span><span class="faq-toggle">+</span></div><div class="faq-answer"><p>Все, кто хочет упростить общение:</p><ul><li>Иностранцы, изучающие русский</li><li>Дети и подростки</li><li>Все, кто ценит простоту и ясность</li></ul></div></div>
+            <div class="faq-item"><div class="faq-question"><span>Сколько правил в грамматике?</span><span class="faq-toggle">+</span></div><div class="faq-answer"><p>Всего 3 основных правила:</p><ul><li>Слова не меняются</li><li>Множественное число = "все"</li><li>Время глагола = "било"/"буду"</li></ul></div></div>
+            <div class="faq-item"><div class="faq-question"><span>Как предложить новое слово?</span><span class="faq-toggle">+</span></div><div class="faq-answer"><p>Присоединяйтесь к нашему Telegram-сообществу и предлагайте слова в обсуждениях! Каждое предложение рассматривается.</p></div></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>⚡ Сибилевец — язык без границ | создано по оригинальной концепции</p>
+    </footer>
+</div>
+
+<script>
+    // Плавный аккордеон для FAQ (улучшенная анимация)
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answerDiv = question.nextElementSibling;
+            const toggleSpan = question.querySelector('.faq-toggle');
+            const isOpen = answerDiv.classList.contains('show');
+            // закрыть все остальные (для удобства, как в оригинале? можно оставить аккордеон с возможностью открыть несколько, но для чистоты — каждый независим)
+            // однако сохраняем поведение: при клике переключаем текущий.
+            if (!isOpen) {
+                answerDiv.classList.add('show');
+                toggleSpan.textContent = '−';
+                // плавное изменение
+            } else {
+                answerDiv.classList.remove('show');
+                toggleSpan.textContent = '+';
+            }
+        });
+    });
+
+    // необязательная микроанимация: добавим лёгкое появление при загрузке для всех элементов
+    window.addEventListener('DOMContentLoaded', () => {
+        // убедимся, что все секции видны (анимация и так сработает через CSS)
+        // дополнительно: если нужно, чтоб ссылки вели на настоящие ресурсы? 
+        // но в оригинале ссылки были placeholder? по факту там кнопки "Перейти" но без реальных ссылок в исходном коде,
+        // тем не менее для точности копии оставляем как демо, при необходимости можно заменить на реальные telegram/youtube если известны.
+        // из метаданных оригинала: нет прямых урлов на telegram сообщество и youtube, но там были призывы. оставляем функционал без ошибок.
+        const tgLink = document.querySelector('.com-card:nth-child(2) a');
+        const ytLink = document.querySelector('.com-card:nth-child(3) a');
+        const btnTg = document.querySelector('.btn-group .btn:first-child');
+        const btnYt = document.querySelector('.btn-group .btn:last-child');
+        if(tgLink) tgLink.addEventListener('click', (e) => { e.preventDefault(); alert('🔗 Telegram сообщество (демо-ссылка) — в реальном проекте добавьте URL'); });
+        if(ytLink) ytLink.addEventListener('click', (e) => { e.preventDefault(); alert('🎬 YouTube канал (демо) — добавьте ссылку'); });
+        if(btnTg) btnTg.addEventListener('click', (e) => { e.preventDefault(); alert('Присоединяйтесь к Telegram — ссылка будет активна'); });
+        if(btnYt) btnYt.addEventListener('click', (e) => { e.preventDefault(); alert('Смотрите обучающие видео на YouTube'); });
+        
+        // улучшенная анимация наведения на кнопки и карточки уже через CSS
+        // дополнительно: красивое свечение для градиента
+    });
+</script>
+</body>
+          </html>
