@@ -3,73 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сибилевец 2 — Светлый стиль</title>
+    <title>Сибилевец 2 — Язык будущего</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <style>
-        /* СБРОС И БАЗОВЫЕ СТИЛИ */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff; /* Чистый белый фон */
-            color: #111111;
-            line-height: 1.6;
-        }
-
-        /* ПЕРЕМЕННЫЕ ЦВЕТОВ (светлая версия) */
         :root {
-            --cyan: #00CCA0; /* Более мягкий циан для белого фона */
+            --cyan: #00CCA0;
             --blue-light: #4A90E2;
             --blue-dark: #2C6FB7;
             --gradient-main: linear-gradient(135deg, var(--cyan), var(--blue-dark));
             --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.12);
+            --radius-xl: 28px;
+            --radius-2xl: 40px;
+            --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* АНИМАЦИИ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === АНИМАЦИИ === */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeUpScale {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         @keyframes scaleUp {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 204, 160, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 18px rgba(0, 204, 160, 0);
+            }
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
         }
 
-        /* ХЕДЕР */
+        .anim-fade-up {
+            animation: fadeUp 0.8s ease-out both;
+        }
+        .anim-fade-up-scale {
+            animation: fadeUpScale 0.8s ease-out both;
+        }
+        .anim-slide-left {
+            animation: slideInLeft 0.8s ease-out both;
+        }
+        .anim-slide-right {
+            animation: slideInRight 0.8s ease-out both;
+        }
+        .anim-scale-up {
+            animation: scaleUp 0.7s ease-out both;
+        }
+
+        /* === ХЕДЕР === */
         header {
-            padding: 20px 40px;
+            padding: 18px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            position: fixed; /* Фиксация */
-            top: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             animation: fadeUp 0.8s ease-out;
+            transition: all 0.3s;
+        }
+        header.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+            padding: 12px 40px;
         }
 
         .brand-container {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
         }
-
         .logo-img {
-            height: 48px;
-            filter: drop-shadow(0 2px 10px rgba(30, 136, 229, 0.3)); /* Добавляет свечение логотипу на белом фоне */
+            height: 44px;
+            filter: drop-shadow(0 2px 8px rgba(30, 136, 229, 0.25));
             transition: transform 0.3s;
         }
-        .logo-img:hover { transform: scale(1.05); }
-
+        .logo-img:hover {
+            transform: scale(1.08) rotate(-3deg);
+        }
         .brand-title {
-            font-size: 1.6rem;
-            font-weight: 900; /* Жирный шрифт */
+            font-size: 1.5rem;
+            font-weight: 900;
             letter-spacing: -0.5px;
             background: var(--gradient-main);
             -webkit-background-clip: text;
@@ -77,244 +173,720 @@
             background-clip: text;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
         nav a {
-            font-weight: 700; /* Жирный для навигации */
+            font-weight: 700;
             color: #333;
             text-decoration: none;
-            margin-left: 30px;
+            padding: 8px 16px;
+            border-radius: 40px;
             position: relative;
-            transition: 0.3s;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        nav a:hover {
+            color: var(--blue-dark);
+            background: rgba(74, 144, 226, 0.06);
         }
         nav a::after {
             content: '';
             position: absolute;
             width: 0;
             height: 3px;
-            bottom: -5px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--gradient-main);
-            transition: 0.3s;
+            border-radius: 3px;
+            transition: width 0.3s;
         }
-        nav a:hover { color: var(--blue-dark); }
-        nav a:hover::after { width: 100%; }
+        nav a:hover::after {
+            width: 60%;
+        }
 
-        /* ГЕРОЙ (ГЛАВНАЯ) */
+        /* === ГЕРОЙ === */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 100px 20px 0;
-            background: linear-gradient(180deg, #f5faff 0%, #ffffff 100%); /* Мягкий градиент фона */
+            padding: 140px 20px 80px;
+            background: linear-gradient(180deg, #f5faff 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 204, 160, 0.08) 0%, transparent 70%);
+            top: -200px;
+            right: -150px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(74, 144, 226, 0.07) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            border-radius: 50%;
+            pointer-events: none;
         }
 
-        h1 {
-            font-size: 5rem;
+        .hero-badge {
+            display: inline-block;
+            padding: 10px 24px;
+            background: rgba(0, 204, 160, 0.08);
+            border: 1px solid rgba(0, 204, 160, 0.25);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #008055;
+            margin-bottom: 28px;
+            animation: fadeUpScale 0.8s ease-out 0.1s both;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 7vw, 6rem);
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 16px;
             background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: scaleUp 1s ease-out 0.2s both;
+            position: relative;
+            z-index: 1;
         }
-
         .hero-subtitle {
-            font-size: 1.4rem;
-            max-width: 700px;
+            font-size: 1.3rem;
+            max-width: 650px;
             color: #555;
             font-weight: 400;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             animation: fadeUp 1s ease-out 0.4s both;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+        }
+
+        /* Статистика */
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 48px;
+            animation: fadeUp 1s ease-out 0.5s both;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-stat {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 24px 32px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            min-width: 130px;
+            transition: all var(--transition-bounce);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .hero-stat:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 204, 160, 0.2);
+        }
+        .hero-stat .stat-number {
+            font-size: 2.6rem;
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            line-height: 1;
+        }
+        .hero-stat .stat-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #666;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-primary {
             display: inline-block;
-            padding: 16px 50px;
+            padding: 18px 54px;
             border-radius: 60px;
             font-weight: 900;
+            font-size: 1.05rem;
             text-decoration: none;
             background: #111;
             color: #fff;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all var(--transition-bounce);
             box-shadow: var(--shadow);
-            animation: fadeUp 1s ease-out 0.6s both;
+            animation: fadeUp 1s ease-out 0.7s both;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.2px;
         }
         .btn-primary:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-6px) scale(1.03);
             background: var(--gradient-main);
             color: #fff;
-            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 204, 160, 0.35);
+            animation: pulseGlow 2s infinite;
         }
 
-        /* СЕКЦИИ */
-        section { padding: 100px 20px; }
+        /* === СЕКЦИИ === */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
-            font-size: 2.8rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 900;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             position: relative;
+            letter-spacing: -0.5px;
         }
         .section-title span {
             background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 70px;
             height: 4px;
             background: var(--gradient-main);
-            margin-top: 10px;
+            margin-top: 12px;
+            border-radius: 2px;
         }
-        .section-title.centered { text-align: center; }
-        .section-title.centered::after { margin: 10px auto 0; }
-
-        .text-body {
-            font-size: 1.2rem;
-            color: #444;
-            margin-bottom: 40px;
-            max-width: 900px;
+        .section-title.centered {
+            text-align: center;
+        }
+        .section-title.centered::after {
+            margin: 12px auto 0;
         }
 
-        /* КАРТОЧКИ ПРОЕКТОВ */
-        .projects-grid {
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 50px;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+        .section-subtitle.centered {
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* === КАРТОЧКИ О ПРОЕКТЕ === */
+        .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 20px;
         }
-        .project-card {
+        .about-card {
             background: #f8f9fe;
-            padding: 40px;
-            border-radius: 24px;
-            transition: 0.4s;
+            padding: 40px 32px;
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-bounce);
             border: 1px solid transparent;
-            animation: fadeUp 0.8s ease-out both;
+            text-align: center;
         }
-        .project-card:hover {
+        .about-card:hover {
             transform: translateY(-10px);
             border-color: rgba(74, 144, 226, 0.2);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            background: #fff;
         }
-        .project-card h3 {
-            font-size: 1.6rem;
+        .about-card .icon-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #fff;
             font-weight: 900;
-            margin-bottom: 10px;
+            box-shadow: 0 8px 30px rgba(0, 204, 160, 0.3);
+            transition: transform 0.3s;
         }
-        .project-card p { color: #666; font-weight: 400; }
+        .about-card:hover .icon-circle {
+            transform: scale(1.1) rotate(-5deg);
+        }
+        .about-card h3 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .about-card p {
+            color: #555;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
 
-        /* АЛФАВИТ */
+        /* === АЛФАВИТ === */
         .alphabet-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin: 40px 0;
         }
         .letter {
-            width: 70px;
-            height: 70px;
+            width: 66px;
+            height: 66px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            border-radius: 16px;
+            border-radius: 18px;
             background: #ffffff;
             color: #111;
-            border: 2px solid #eee;
-            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid #e8e8e8;
+            transition: all var(--transition-bounce);
             cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .letter::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 16px;
         }
         .letter:hover {
-            transform: scale(1.15) rotate(-5deg);
-            background: #111;
+            transform: scale(1.2) rotate(-6deg);
+            border-color: transparent;
             color: #fff;
-            border-color: #111;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 35px rgba(0, 204, 160, 0.3);
+            z-index: 10;
+        }
+        .letter:hover::before {
+            opacity: 1;
+        }
+        .letter span {
+            position: relative;
+            z-index: 1;
+        }
+        .alphabet-note {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 700;
+            color: #777;
+            font-size: 0.95rem;
+            background: #f8f9fe;
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
         }
 
-        /* КОНТАКТЫ */
+        /* === ОСОБЕННОСТИ === */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
+        .feature-card {
+            background: #f8f9fe;
+            padding: 36px 32px;
+            border-radius: var(--radius-xl);
+            transition: all var(--transition-bounce);
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            border-radius: 0 0 4px 4px;
+        }
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 144, 226, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            background: #fff;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+        .feature-card .feature-icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+        .feature-card ul li {
+            padding: 6px 0;
+            color: #555;
+            font-weight: 400;
+            position: relative;
+            padding-left: 24px;
+        }
+        .feature-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        /* === СООБЩЕСТВО === */
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .community-card {
+            background: #f8f9fe;
+            padding: 40px 32px;
+            border-radius: var(--radius-xl);
+            text-align: center;
+            transition: all var(--transition-bounce);
+            border: 1px solid transparent;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .community-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(74, 144, 226, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            background: #fff;
+        }
+        .community-card .comm-icon {
+            font-size: 3.5rem;
+            margin-bottom: 14px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .community-card:hover .comm-icon {
+            transform: scale(1.15);
+            animation: float 2s ease-in-out infinite;
+        }
+        .community-card h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+        .community-card p {
+            color: #666;
+            font-weight: 400;
+        }
+        .community-card .comm-link-text {
+            display: inline-block;
+            margin-top: 14px;
+            font-weight: 700;
+            color: var(--blue-dark);
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        .community-card:hover .comm-link-text {
+            color: var(--cyan);
+        }
+
+        /* === FAQ === */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .faq-item {
+            background: #f8f9fe;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        .faq-item:hover {
+            border-color: rgba(74, 144, 226, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+        .faq-item summary {
+            padding: 22px 28px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: -0.2px;
+            transition: color 0.3s;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary::after {
+            content: '+';
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--cyan);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            flex-shrink: 0;
+            margin-left: 16px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 204, 160, 0.08);
+        }
+        .faq-item[open] summary::after {
+            content: '−';
+            transform: rotate(180deg);
+            background: rgba(0, 204, 160, 0.18);
+            color: #008055;
+        }
+        .faq-item[open] summary {
+            color: #008055;
+        }
+        .faq-item .faq-answer {
+            padding: 0 28px 22px;
+            color: #555;
+            font-weight: 400;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        .faq-item .faq-answer ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .faq-item .faq-answer ul li {
+            margin-bottom: 4px;
+        }
+
+        /* === КОНТАКТЫ === */
         .contact-box {
             background: #f8f9fe;
-            padding: 80px;
-            border-radius: 40px;
+            padding: 70px 40px;
+            border-radius: var(--radius-2xl);
             text-align: center;
             box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        .contact-box:hover {
+            box-shadow: var(--shadow-lg);
         }
         .contact-btn {
             display: inline-block;
-            padding: 18px 60px;
+            padding: 18px 56px;
             border-radius: 60px;
             background: #111;
             color: #fff;
             font-weight: 900;
+            font-size: 1rem;
             text-decoration: none;
             margin-top: 20px;
-            transition: 0.3s;
+            transition: all var(--transition-bounce);
+            letter-spacing: -0.2px;
         }
         .contact-btn:hover {
             background: var(--gradient-main);
-            transform: scale(1.05);
+            transform: scale(1.06);
+            box-shadow: 0 15px 40px rgba(0, 204, 160, 0.35);
+            animation: pulseGlow 2s infinite;
         }
 
-        /* ФУТЕР */
+        /* === ФУТЕР === */
         footer {
             text-align: center;
-            padding: 40px;
-            color: #777;
+            padding: 36px 20px;
+            color: #888;
             border-top: 1px solid #eee;
-            font-weight: 400;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
 
-        /* АДАПТИВ */
+        /* === АДАПТИВ === */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            header { flex-direction: column; gap: 15px; padding: 15px; }
-            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-            nav a { margin: 0 10px; }
-            .contact-box { padding: 30px; }
-            .letter { width: 55px; height: 55px; font-size: 1.4rem; }
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 15px;
+            }
+            header.scrolled {
+                padding: 10px 15px;
+            }
+            nav {
+                gap: 4px;
+            }
+            nav a {
+                margin: 0;
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+            .hero-stats {
+                gap: 14px;
+            }
+            .hero-stat {
+                padding: 16px 20px;
+                min-width: 100px;
+            }
+            .hero-stat .stat-number {
+                font-size: 2rem;
+            }
+            .hero-stat .stat-label {
+                font-size: 0.7rem;
+            }
+            .btn-primary {
+                padding: 14px 36px;
+                font-size: 0.95rem;
+            }
+            .contact-box {
+                padding: 30px 20px;
+            }
+            .letter {
+                width: 52px;
+                height: 52px;
+                font-size: 1.3rem;
+                border-radius: 14px;
+            }
+            .letter:hover {
+                transform: scale(1.15) rotate(-4deg);
+            }
+            .about-grid,
+            .features-grid,
+            .community-grid {
+                grid-template-columns: 1fr;
+            }
+            .faq-item summary {
+                padding: 16px 20px;
+                font-size: 1rem;
+            }
+            .faq-item .faq-answer {
+                padding: 0 20px 16px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header id="site-header">
         <div class="brand-container">
-            <!-- ЛОГОТИП -->
             <img src="logo.png" alt="Логотип Сибилевец 2" class="logo-img">
             <span class="brand-title">Сибилевец 2</span>
         </div>
         <nav>
             <a href="#about">О проекте</a>
             <a href="#alphabet">Алфавит</a>
-            <a href="#projects">Проекты</a>
+            <a href="#features">Особенности</a>
+            <a href="#community">Сообщество</a>
+            <a href="#faq">Вопросы</a>
             <a href="#contacts">Контакты</a>
         </nav>
     </header>
 
-    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <!-- ГЕРОЙ -->
     <section class="hero">
-        <h1>Сибилевец 2</h1>
-        <p class="hero-subtitle">Новый уровень цифровых решений. Современный минимализм, смелые анимации и жирный шрифт в каждой детали.</p>
-        <a href="#projects" class="btn-primary">Смотреть портфолио</a>
+        <div class="hero-badge">🚀 Новая версия языка</div>
+        <h1>Язык будущего</h1>
+        <p class="hero-subtitle">Простой, логичный, современный. Упрощённый русский для лёгкого общения — без падежей, с понятными правилами и интуитивным алфавитом.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="stat-number">3</span>
+                <span class="stat-label">правила грамматики</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-number">31</span>
+                <span class="stat-label">букв в алфавите</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-number">5</span>
+                <span class="stat-label">минут на изучение</span>
+            </div>
+        </div>
+        <a href="#about" class="btn-primary">Узнать больше</a>
     </section>
 
     <!-- О ПРОЕКТЕ -->
     <section id="about">
         <div class="container">
             <div class="section-title"><span>О проекте</span></div>
-            <div class="text-body">
-                <p>Мы создали этот сайт, чтобы показать мощь чистого дизайна и современных технологий. В отличие от темных тем, белый фон позволяет концентрироваться на содержании, подчеркивая яркость логотипа и текстовых акцентов.</p>
-                <p>Здесь вы найдете русский алфавит, стилизованный в виде уникальных плашек, и серию проектов, демонстрирующих наш подход к делу. «Сибилевец 2» — это обновленная версия себя.</p>
+            <p class="section-subtitle">Инновационный подход к языку — максимальная простота без потери смысла.</p>
+            <div class="about-grid">
+                <div class="about-card anim-fade-up-scale" style="animation-delay: 0.1s;">
+                    <div class="icon-circle">🎯</div>
+                    <h3>Миссия</h3>
+                    <p>Создать максимально простой и логичный язык для повседневного общения, доступный каждому.</p>
+                </div>
+                <div class="about-card anim-fade-up-scale" style="animation-delay: 0.25s;">
+                    <div class="icon-circle">💡</div>
+                    <h3>Философия</h3>
+                    <p>«Пишем как слышим, думаем как говорим» — основа понятной и интуитивной коммуникации.</p>
+                </div>
+                <div class="about-card anim-fade-up-scale" style="animation-delay: 0.4s;">
+                    <div class="icon-circle">🚀</div>
+                    <h3>Достижения</h3>
+                    <p>Первый в поиске Google, скорость загрузки 100/100, профессиональная реализация на всех устройствах.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -322,39 +894,156 @@
     <!-- АЛФАВИТ -->
     <section id="alphabet">
         <div class="container">
-            <div class="section-title centered"><span>Русский алфавит</span></div>
+            <div class="section-title centered"><span>Упрощённый алфавит</span></div>
+            <p class="section-subtitle centered">31 буква, каждая обозначает один звук. Чёткое произношение без исключений. Звук [и] пишется как <strong>I</strong>, звук [ɨ] — как <strong>И</strong>. Логичные замены сложных звуков.</p>
             <div class="alphabet-grid">
-                <!-- 33 буквы -->
-                <div class="letter">А</div><div class="letter">Б</div><div class="letter">В</div><div class="letter">Г</div>
-                <div class="letter">Д</div><div class="letter">Е</div><div class="letter">Ё</div><div class="letter">Ж</div>
-                <div class="letter">З</div><div class="letter">И</div><div class="letter">Й</div><div class="letter">К</div>
-                <div class="letter">Л</div><div class="letter">М</div><div class="letter">Н</div><div class="letter">О</div>
-                <div class="letter">П</div><div class="letter">Р</div><div class="letter">С</div><div class="letter">Т</div>
-                <div class="letter">У</div><div class="letter">Ф</div><div class="letter">Х</div><div class="letter">Ц</div>
-                <div class="letter">Ч</div><div class="letter">Ш</div><div class="letter">Щ</div><div class="letter">Ъ</div>
-                <div class="letter">Ы</div><div class="letter">Ь</div><div class="letter">Э</div><div class="letter">Ю</div>
-                <div class="letter">Я</div>
+                <div class="letter"><span>А</span></div><div class="letter"><span>Б</span></div><div class="letter"><span>В</span></div><div class="letter"><span>Г</span></div>
+                <div class="letter"><span>Д</span></div><div class="letter"><span>Е</span></div><div class="letter"><span>Ё</span></div><div class="letter"><span>Ж</span></div>
+                <div class="letter"><span>З</span></div><div class="letter"><span>I</span></div><div class="letter"><span>И</span></div><div class="letter"><span>Й</span></div>
+                <div class="letter"><span>К</span></div><div class="letter"><span>Л</span></div><div class="letter"><span>М</span></div><div class="letter"><span>Н</span></div>
+                <div class="letter"><span>О</span></div><div class="letter"><span>П</span></div><div class="letter"><span>Р</span></div><div class="letter"><span>С</span></div>
+                <div class="letter"><span>Т</span></div><div class="letter"><span>У</span></div><div class="letter"><span>Ф</span></div><div class="letter"><span>Х</span></div>
+                <div class="letter"><span>Ц</span></div><div class="letter"><span>Ч</span></div><div class="letter"><span>Ш</span></div><div class="letter"><span>Щ</span></div>
+                <div class="letter"><span>Ъ</span></div><div class="letter"><span>Ы</span></div><div class="letter"><span>Ь</span></div>
+                <div class="letter"><span>Э</span></div><div class="letter"><span>Ю</span></div><div class="letter"><span>Я</span></div>
+            </div>
+            <div style="text-align:center;">
+                <span class="alphabet-note">💡 I (латиница) — звук [и] как в «мир» &nbsp;|&nbsp; И (кириллица) — звук [ɨ] как в «мышь»</span>
             </div>
         </div>
     </section>
 
-    <!-- ПРОЕКТЫ -->
-    <section id="projects">
+    <!-- ОСОБЕННОСТИ ЯЗЫКА -->
+    <section id="features">
         <div class="container">
-            <div class="section-title"><span>Наши проекты</span></div>
-            <div class="projects-grid">
-                <div class="project-card" style="animation-delay: 0.1s;">
-                    <h3>Лендинг "C2"</h3>
-                    <p>Современный промо-сайт с использованием градиентов и анимации на чистом CSS.</p>
+            <div class="section-title"><span>Особенности языка</span></div>
+            <p class="section-subtitle">Что делает Сибилевец уникальным и невероятно простым.</p>
+            <div class="features-grid">
+                <div class="feature-card anim-slide-left" style="animation-delay: 0.1s;">
+                    <span class="feature-icon">📖</span>
+                    <h3>Упрощённый алфавит</h3>
+                    <p style="color:#555;">31 буква, каждая обозначает один звук. Чёткое произношение без исключений.</p>
+                    <ul>
+                        <li>Звук [и] пишется как I</li>
+                        <li>Звук [ɨ] пишется как И</li>
+                        <li>Логичные замены сложных звуков</li>
+                    </ul>
                 </div>
-                <div class="project-card" style="animation-delay: 0.2s;">
-                    <h3>Алфавит-конструктор</h3>
-                    <p>Интерактивный модуль для изучения букв с визуальными эффектами.</p>
+                <div class="feature-card anim-fade-up-scale" style="animation-delay: 0.25s;">
+                    <span class="feature-icon">🔄</span>
+                    <h3>Отсутствие падежей</h3>
+                    <p style="color:#555;">Слова не меняются по падежам, родам и числам. Одна форма — навсегда.</p>
+                    <ul>
+                        <li>Никаких склонений</li>
+                        <li>Постоянная форма слов</li>
+                        <li>Простота использования</li>
+                    </ul>
                 </div>
-                <div class="project-card" style="animation-delay: 0.3s;">
-                    <h3>Дизайн-система</h3>
-                    <p>Набор ui-компонентов с жирными шрифтами и светлой темой.</p>
+                <div class="feature-card anim-slide-right" style="animation-delay: 0.4s;">
+                    <span class="feature-icon">🧠</span>
+                    <h3>Логичная грамматика</h3>
+                    <p style="color:#555;">Всего 3 основных правила, которые можно выучить за 5 минут.</p>
+                    <ul>
+                        <li>Множественное число: «все»</li>
+                        <li>Времена: «било» / «буду»</li>
+                        <li>Предлоги вместо падежей</li>
+                    </ul>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СООБЩЕСТВО -->
+    <section id="community">
+        <div class="container">
+            <div class="section-title centered"><span>Присоединяйтесь к сообществу</span></div>
+            <p class="section-subtitle centered">Станьте частью языковой революции — изучайте, общайтесь, развивайте язык вместе с нами.</p>
+            <div class="community-grid">
+                <a href="https://t.me/sibylevec" target="_blank" rel="noopener" class="community-card anim-fade-up-scale" style="animation-delay: 0.1s;">
+                    <span class="comm-icon">💬</span>
+                    <h3>Общайтесь</h3>
+                    <p>Присоединяйтесь к Telegram-сообществу, обсуждайте новые слова и идеи.</p>
+                    <span class="comm-link-text">Перейти в Telegram →</span>
+                </a>
+                <a href="https://youtube.com/@sibylevec" target="_blank" rel="noopener" class="community-card anim-fade-up-scale" style="animation-delay: 0.25s;">
+                    <span class="comm-icon">🎥</span>
+                    <h3>Смотрите</h3>
+                    <p>Обучающие видео на YouTube — освойте язык быстро и наглядно.</p>
+                    <span class="comm-link-text">Перейти на YouTube →</span>
+                </a>
+                <a href="#alphabet" class="community-card anim-fade-up-scale" style="animation-delay: 0.4s;">
+                    <span class="comm-icon">📚</span>
+                    <h3>Изучайте</h3>
+                    <p>Освойте язык за 5 минут с нашими материалами и алфавитом.</p>
+                    <span class="comm-link-text">Начать изучение →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-title centered"><span>Вопросы и ответы</span></div>
+            <p class="section-subtitle centered">Всё, что вы хотели знать о Сибилевце.</p>
+            <div class="faq-list">
+                <details class="faq-item anim-fade-up" style="animation-delay: 0.05s;">
+                    <summary>Что такое Сибилевец?</summary>
+                    <div class="faq-answer">
+                        <p>Сибилевец — это упрощённый вариант русского языка, созданный для лёгкого общения. Он сохраняет основу русского, но убирает сложные грамматические правила.</p>
+                    </div>
+                </details>
+                <details class="faq-item anim-fade-up" style="animation-delay: 0.1s;">
+                    <summary>Чем Сибилевец отличается от русского?</summary>
+                    <div class="faq-answer">
+                        <p>Основные отличия:</p>
+                        <ul>
+                            <li>Нет падежей и спряжений</li>
+                            <li>31 буква с чёткими звуками</li>
+                            <li>3 простых правила грамматики</li>
+                            <li>Слова не меняются</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="faq-item anim-fade-up" style="animation-delay: 0.15s;">
+                    <summary>Почему в алфавите есть латинская I?</summary>
+                    <div class="faq-answer">
+                        <p>Для чистоты принципа «пишем как слышим»:</p>
+                        <ul>
+                            <li><strong>I</strong> (латиница) — звук [и] как в «мир»</li>
+                            <li><strong>И</strong> (кириллица) — звук [ɨ] как в «мышь»</li>
+                        </ul>
+                        <p>Так каждый звук получает свою уникальную букву.</p>
+                    </div>
+                </details>
+                <details class="faq-item anim-fade-up" style="animation-delay: 0.2s;">
+                    <summary>Кто может использовать Сибилевец?</summary>
+                    <div class="faq-answer">
+                        <p>Все, кто хочет упростить общение:</p>
+                        <ul>
+                            <li>Иностранцы, изучающие русский</li>
+                            <li>Дети и подростки</li>
+                            <li>Все, кто ценит простоту и ясность</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="faq-item anim-fade-up" style="animation-delay: 0.25s;">
+                    <summary>Сколько правил в грамматике?</summary>
+                    <div class="faq-answer">
+                        <p>Всего <strong>3 основных правила</strong>:</p>
+                        <ul>
+                            <li>Слова не меняются</li>
+                            <li>Множественное число = «все»</li>
+                            <li>Время глагола = «било» / «буду»</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="faq-item anim-fade-up" style="animation-delay: 0.3s;">
+                    <summary>Как предложить новое слово?</summary>
+                    <div class="faq-answer">
+                        <p>Присоединяйтесь к нашему Telegram-сообществу и предлагайте слова в обсуждениях! Каждое предложение рассматривается.</p>
+                    </div>
+                </details>
             </div>
         </div>
     </section>
@@ -362,17 +1051,61 @@
     <!-- КОНТАКТЫ -->
     <section id="contacts">
         <div class="container">
-            <div class="contact-box">
+            <div class="contact-box anim-fade-up-scale">
                 <div class="section-title centered"><span>Свяжитесь с нами</span></div>
-                <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px;">Готовы обсудить ваш проект или просто поболтать о дизайне? Мы всегда на связи!</p>
-                <a href="#" class="contact-btn">Написать сообщение</a>
+                <p style="font-size:1.15rem;max-width:600px;margin:0 auto 28px;color:#555;">Готовы обсудить проект или предложить идею для развития языка? Мы всегда на связи!</p>
+                <a href="https://t.me/sibylevec" target="_blank" rel="noopener" class="contact-btn">Написать в Telegram</a>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Сибилевец 2. Все права защищены.</p>
+        <p>&copy; 2026 Сибилевец 2. Все права защищены. Язык будущего уже здесь.</p>
     </footer>
 
+    <script>
+        // Добавление тени на хедер при скролле
+        const header = document.getElementById('site-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Плавное открытие FAQ — закрытие других details при открытии нового
+        const allDetails = document.querySelectorAll('.faq-item');
+        allDetails.forEach(detail => {
+            detail.addEventListener('toggle', function() {
+                if (this.open) {
+                    allDetails.forEach(other => {
+                        if (other !== this && other.open) {
+                            other.open = false;
+                        }
+                    });
+                }
+            });
+        });
+
+        // Анимация появления при скролле для элементов без анимации
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.about-card, .feature-card, .community-card, .faq-item, .hero-stat').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
