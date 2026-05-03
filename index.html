@@ -3,71 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сибилевец 2 | Лингвистика</title>
+    <title>Сибилевец 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Переменные для настройки цветов под логотип */
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Пример под синий лого */
-            --bg-dark: #0f172a;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #f8fafc;
-            --accent-color: #38bdf8;
-        }
-
+        /* Сброс стилей */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(106, 17, 203, 0.15) 0px, transparent 50%);
-            color: var(--text-main);
-            line-height: 1.6;
+            background-color: #050505; /* Глубокий черный фон, подходящий для логотипа */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Навигация */
-        nav {
+        /* Переменные цветов, взятые с логотипа */
+        :root {
+            --cyan: #1DE9B6;
+            --blue-light: #42A5F5;
+            --blue-dark: #1E88E5;
+            --gradient-main: linear-gradient(135deg, var(--cyan), var(--blue-dark));
+            --gradient-transparent: linear-gradient(135deg, rgba(29, 233, 182, 0.5), rgba(30, 136, 229, 0.5));
+        }
+
+        /* Анимация появления */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .animate-fade-delay {
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            opacity: 0; /* Начальное скрытие */
+        }
+
+        /* Навигация и Логотип */
+        header {
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            position: sticky;
+            flex-wrap: wrap;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo-container {
+        .brand-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .logo-img {
-            height: 40px;
+            height: 50px;
             width: auto;
+            transition: transform 0.3s ease;
         }
 
-        .brand-name {
+        .logo-img:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .brand-title {
             font-size: 1.5rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
+            font-weight: 900;
+            /* Градиентный текст */
+            background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: #a0a0a0;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: 0.3s;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            color: var(--cyan);
         }
 
         /* Герой-секция */
         .hero {
-            height: 90vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -76,142 +117,136 @@
             padding: 0 20px;
         }
 
-        .hero h1 {
+        h1 {
             font-size: 4rem;
             margin-bottom: 20px;
-            letter-spacing: -1px;
+            /* Прозрачный градиент на фоне */
+            background: var(--gradient-transparent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
         }
 
-        .hero p {
-            font-size: 1.25rem;
+        .hero-subtitle {
+            font-size: 1.2rem;
             max-width: 600px;
-            opacity: 0.8;
+            color: #b0b0b0;
             margin-bottom: 40px;
+            line-height: 1.6;
         }
 
-        /* Карточки с эффектом стекла */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 60px 10%;
+        .btn-glow {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #fff;
+            background: var(--gradient-main);
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(29, 233, 182, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(29, 233, 182, 0.6);
+        }
+
+        /* Секция "О проекте" с эффектом стекла */
+        .section-about {
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            max-width: 800px;
             padding: 40px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-        }
-
-        .glass-card h3 {
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-
-        /* Кнопки */
-        .btn {
-            padding: 14px 28px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        /* Секция особенностей */
-        .features {
-            padding: 100px 10%;
-            background: rgba(255,255,255,0.02);
-        }
-
-        footer {
-            padding: 50px 10%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            /* Прозрачный градиент для бордера или фона */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             text-align: center;
-            border-top: 1px solid var(--glass-border);
-            opacity: 0.6;
-            font-size: 0.9rem;
         }
 
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(145deg, var(--blue-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контакты */
+        .section-contacts {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .bottom-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            /* Текст с градиентом */
+            background: linear-gradient(to right, var(--cyan), var(--blue-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Адаптивность */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .grid { padding: 40px 5%; }
+            h1 { font-size: 2.5rem; }
+            .brand-title { font-size: 1.2rem; }
+            header { padding: 15px 20px; flex-direction: column; gap: 10px; }
+            .logo-img { height: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo-container">
-            <img src="logo.png" alt="Logo" class="logo-img">
-            <span class="brand-name">Сибилевец 2</span>
+    <header>
+        <div class="brand-container animate-fade">
+            <!-- ЛОГОТИП ИЗ ПЕРЕМЕННОЙ logo.png -->
+            <img src="logo.png" alt="Логотип Сибилевец 2" class="logo-img">
+            <span class="brand-title">Сибилевец 2</span>
         </div>
-        <div class="nav-links">
-            <a href="#" class="btn" style="color: white">О проекте</a>
-        </div>
-    </nav>
+        <nav class="animate-fade-delay">
+            <a href="#about">О проекте</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
 
-    <section class="hero">
-        <h1>Язык будущего ё</h1>
-        <p>Простой, логичный, современный. Сибилевец 2 создан для максимально эффективного общения без лишних барьеров.</p>
-        <a href="#about" class="btn btn-primary">Начать изучение</a>
-    </section>
+    <main>
+        <section class="hero">
+            <h1 class="animate-fade">Сибилевец 2</h1>
+            <p class="hero-subtitle animate-fade-delay">
+                Новое поколение возможностей. Современный дизайн с использованием прозрачных градиентов, 
+                инновационных решений и анимации.
+            </p>
+            <a href="#about" class="btn-glow animate-fade-delay" style="animation-delay: 0.6s;">Узнать больше</a>
+        </section>
 
-    <section id="about" class="grid">
-        <div class="glass-card">
-            <h3>🎯 Миссия</h3>
-            <p>Создание интуитивно понятной языковой системы, где правила минимальны, а понимание максимально.</p>
-        </div>
-        <div class="glass-card">
-            <h3>💡 Философия</h3>
-            <p>«Пишем как слышим» — мы убрали все исторические наслоения, оставив только живой функционал языка.</p>
-        </div>
-        <div class="glass-card">
-            <h3>🚀 Результат</h3>
-            <p>Вы сможете понимать основы и строить первые предложения уже через 5 минут после знакомства с системой.</p>
-        </div>
-    </section>
-
-    <section class="features">
-        <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;">Почему Сибилевец 2?</h2>
-        <div class="grid">
+        <section id="about" class="section-about animate-fade">
             <div class="glass-card">
-                <h3>31 Буква</h3>
-                <p>Каждый звук имеет строго одну форму записи. Никаких исключений и сложных сочетаний.</p>
+                <h2>О проекте</h2>
+                <p style="color: #ddd; line-height: 1.8;">
+                    Добро пожаловать в новый этап развития! Мы убрали все лишние инициалы и сосредоточились 
+                    на главном — чистоте кода, визуальном стиле и удобстве. Наш сайт использует технологии 
+                    градиентов с прозрачностью (alpha-каналы) для создания глубины и эффекта свечения, 
+                    вдохновленного вашим логотипом.
+                </p>
             </div>
-            <div class="glass-card">
-                <h3>Без падежей</h3>
-                <p>Забудьте о склонениях. Грамматика построена на логике расположения слов и предлогов.</p>
-            </div>
-            <div class="glass-card">
-                <h3>3 Правила</h3>
-                <p>Вся структура языка умещается в три простых правила, доступных каждому.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>&copy; 2026 Сибилевец 2. Все права защищены.</p>
-    </footer>
+        <section id="contacts" class="section-contacts animate-fade-delay">
+            <div class="bottom-title">Свяжитесь с нами</div>
+            <p style="color: #888; max-width: 500px; margin: 0 auto;">
+                Всегда открыты к сотрудничеству и новым идеям. Мы — команда «Сибилевец 2».
+            </p>
+        </section>
+    </main>
 
 </body>
 </html>
