@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сибилевец — Язык будущего</title>
+    <title>Сибилевец 2 — Язык будущего</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
             --text-secondary: #b0b0bb;
             --text-muted: #888899;
             --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(0, 204, 160, 0.25);
+            --border-hover: rgba(0, 230, 180, 0.25);
             --cyan: #00e6b4;
             --cyan-glow: rgba(0, 230, 180, 0.3);
             --blue-light: #5ba0f5;
@@ -47,12 +47,13 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
+            background: linear-gradient(155deg, #08080c 0%, #0b131b 45%, #0d1720 75%, #0a1018 100%);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
         }
 
         /* === АНИМАЦИИ === */
@@ -124,15 +125,6 @@
                 transform: translateY(-10px);
             }
         }
-        @keyframes borderPulse {
-            0%,
-            100% {
-                border-color: rgba(255, 255, 255, 0.06);
-            }
-            50% {
-                border-color: rgba(0, 230, 180, 0.3);
-            }
-        }
         @keyframes gradientShift {
             0% {
                 background-position: 0% 50%;
@@ -167,7 +159,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(8, 8, 12, 0.78);
+            background: rgba(8, 8, 12, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             position: fixed;
@@ -181,7 +173,7 @@
         header.scrolled {
             box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
             padding: 10px 40px;
-            background: rgba(8, 8, 12, 0.9);
+            background: rgba(8, 8, 12, 0.88);
         }
 
         .brand-container {
@@ -257,14 +249,14 @@
             padding: 140px 20px 80px;
             position: relative;
             overflow: hidden;
-            background: var(--bg-primary);
+            background: transparent;
         }
         .hero::before {
             content: '';
             position: absolute;
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, rgba(0, 230, 180, 0.06) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(0, 230, 180, 0.05) 0%, transparent 70%);
             top: -250px;
             right: -200px;
             border-radius: 50%;
@@ -275,7 +267,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(91, 160, 245, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(91, 160, 245, 0.04) 0%, transparent 70%);
             bottom: -150px;
             left: -150px;
             border-radius: 50%;
@@ -285,7 +277,7 @@
         .hero-badge {
             display: inline-block;
             padding: 10px 24px;
-            background: rgba(0, 230, 180, 0.08);
+            background: rgba(0, 230, 180, 0.07);
             border: 1px solid rgba(0, 230, 180, 0.22);
             border-radius: 50px;
             font-weight: 700;
@@ -312,7 +304,7 @@
         }
         .hero-subtitle {
             font-size: 1.25rem;
-            max-width: 620px;
+            max-width: 650px;
             color: var(--text-secondary);
             font-weight: 500;
             margin-bottom: 42px;
@@ -321,8 +313,17 @@
             z-index: 1;
             line-height: 1.7;
         }
+        .hero-subtitle a {
+            color: var(--cyan);
+            font-weight: 800;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        .hero-subtitle a:hover {
+            color: #fff;
+        }
 
-        /* Статистика — карточки как в оригинале */
+        /* Статистика */
         .hero-stats {
             display: flex;
             gap: 28px;
@@ -415,6 +416,7 @@
         section {
             padding: 100px 20px;
             position: relative;
+            background: transparent;
         }
         .container {
             max-width: 1150px;
@@ -849,7 +851,8 @@
             border-top: 1px solid var(--border-subtle);
             font-weight: 500;
             font-size: 0.9rem;
-            background: var(--bg-primary);
+            background: rgba(8, 8, 12, 0.7);
+            backdrop-filter: blur(10px);
         }
         footer a {
             color: var(--cyan);
@@ -937,281 +940,327 @@
 
     <header id="site-header">
         <div class="brand-container">
-            <img src="logo.png" alt="Логотип Сибилевец" class="logo-img">
-            <span class="brand-title">Сибилевец</span>
+            <img src="logo.png" alt="Логотип Сибилевец 2" class="logo-img">
+            <span class="brand-title" id="brandName">Сибилевец 2</span>
         </div>
-        <nav>
-            <a href="#about">О проекте</a>
-            <a href="#alphabet">Алфавит</a>
-            <a href="#features">Особенности</a>
-            <a href="#community">Сообщество</a>
-            <a href="#faq">Вопросы</a>
-            <a href="#contacts">Контакты</a>
-        </nav>
+        <nav id="mainNav"></nav>
     </header>
 
     <!-- ГЕРОЙ -->
     <section class="hero">
-        <div class="hero-badge">🚀 Язык будущего</div>
-        <h1>Сибилевец</h1>
-        <p class="hero-subtitle">
-            Простой, логичный, современный. Этот язык является основным на
-            <a href="https://timoshamoscow.github.io/sibylevec-site.github.io/" target="_blank" rel="noopener" style="color: var(--cyan); font-weight: 800; text-decoration: underline; text-underline-offset: 4px;">Сибилевце</a>
-            и основан на русском языке. Никаких падежей, только понятные правила и интуитивный алфавит.
-        </p>
-        <div class="hero-stats">
-            <div class="hero-stat">
-                <span class="stat-number">3</span>
-                <span class="stat-label">правила грамматики</span>
-            </div>
-            <div class="hero-stat">
-                <span class="stat-number">31</span>
-                <span class="stat-label">букв в алфавите</span>
-            </div>
-            <div class="hero-stat">
-                <span class="stat-number">5</span>
-                <span class="stat-label">минут на изучение</span>
-            </div>
-        </div>
-        <a href="#about" class="btn-primary">Узнать больше</a>
+        <div class="hero-badge" id="heroBadge"></div>
+        <h1 id="heroTitle"></h1>
+        <p class="hero-subtitle" id="heroSubtitle"></p>
+        <div class="hero-stats" id="heroStatsContainer"></div>
+        <a href="#about" class="btn-primary" id="heroBtn"></a>
     </section>
 
     <!-- О ПРОЕКТЕ -->
     <section id="about">
         <div class="container">
-            <div class="section-title"><span>О проекте</span></div>
-            <p class="section-subtitle">Инновационный подход к языку — максимальная простота без потери смысла.</p>
-            <div class="about-grid">
-                <div class="about-card anim-fade-up-scale" style="animation-delay: 0.1s;">
-                    <div class="icon-circle">🎯</div>
-                    <h3>Миссия</h3>
-                    <p>Создать максимально простой и логичный язык для повседневного общения, доступный каждому.</p>
-                </div>
-                <div class="about-card anim-fade-up-scale" style="animation-delay: 0.25s;">
-                    <div class="icon-circle">💡</div>
-                    <h3>Философия</h3>
-                    <p>«Пишем как слышим, думаем как говорим» — основа понятной и интуитивной коммуникации.</p>
-                </div>
-                <div class="about-card anim-fade-up-scale" style="animation-delay: 0.4s;">
-                    <div class="icon-circle">🚀</div>
-                    <h3>Достижения</h3>
-                    <p>Первый в поиске Google, скорость загрузки 100/100, профессиональная реализация на всех устройствах.</p>
-                </div>
-            </div>
+            <div class="section-title"><span id="aboutTitle"></span></div>
+            <p class="section-subtitle" id="aboutSubtitle"></p>
+            <div class="about-grid" id="aboutGrid"></div>
         </div>
     </section>
 
     <!-- АЛФАВИТ -->
     <section id="alphabet">
         <div class="container">
-            <div class="section-title centered"><span>Упрощённый алфавит</span></div>
-            <p class="section-subtitle centered">31 буква, каждая обозначает один звук. Чёткое произношение без исключений.</p>
-            <div class="alphabet-grid">
-                <div class="letter"><span>А</span></div><div class="letter"><span>Б</span></div><div class="letter"><span>В</span></div><div class="letter"><span>Г</span></div>
-                <div class="letter"><span>Д</span></div><div class="letter"><span>Е</span></div><div class="letter"><span>Ё</span></div><div class="letter"><span>Ж</span></div>
-                <div class="letter"><span>З</span></div><div class="letter"><span>I</span></div><div class="letter"><span>И</span></div><div class="letter"><span>Й</span></div>
-                <div class="letter"><span>К</span></div><div class="letter"><span>Л</span></div><div class="letter"><span>М</span></div><div class="letter"><span>Н</span></div>
-                <div class="letter"><span>О</span></div><div class="letter"><span>П</span></div><div class="letter"><span>Р</span></div><div class="letter"><span>С</span></div>
-                <div class="letter"><span>Т</span></div><div class="letter"><span>У</span></div><div class="letter"><span>Ф</span></div><div class="letter"><span>Х</span></div>
-                <div class="letter"><span>Ц</span></div><div class="letter"><span>Ч</span></div><div class="letter"><span>Ш</span></div><div class="letter"><span>Щ</span></div>
-                <div class="letter"><span>Ъ</span></div><div class="letter"><span>Ы</span></div><div class="letter"><span>Ь</span></div>
-                <div class="letter"><span>Э</span></div><div class="letter"><span>Ю</span></div><div class="letter"><span>Я</span></div>
-            </div>
+            <div class="section-title centered"><span id="alphabetTitle"></span></div>
+            <p class="section-subtitle centered" id="alphabetSubtitle"></p>
+            <div class="alphabet-grid" id="alphabetGrid"></div>
         </div>
     </section>
 
     <!-- ОСОБЕННОСТИ ЯЗЫКА -->
     <section id="features">
         <div class="container">
-            <div class="section-title"><span>Особенности языка</span></div>
-            <p class="section-subtitle">Что делает Сибилевец уникальным и невероятно простым.</p>
-            <div class="features-grid">
-                <div class="feature-card anim-slide-left" style="animation-delay: 0.1s;">
-                    <span class="feature-icon">📖</span>
-                    <h3>Упрощённый алфавит</h3>
-                    <p>31 буква, каждая обозначает один звук. Чёткое произношение без исключений.</p>
-                    <ul>
-                        <li>Звук [и] пишется как I</li>
-                        <li>Звук [ɨ] пишется как И</li>
-                        <li>Логичные замены сложных звуков</li>
-                    </ul>
-                </div>
-                <div class="feature-card anim-fade-up-scale" style="animation-delay: 0.25s;">
-                    <span class="feature-icon">🔄</span>
-                    <h3>Отсутствие падежей</h3>
-                    <p>Слова не меняются по падежам, родам и числам. Одна форма — навсегда.</p>
-                    <ul>
-                        <li>Никаких склонений</li>
-                        <li>Постоянная форма слов</li>
-                        <li>Простота использования</li>
-                    </ul>
-                </div>
-                <div class="feature-card anim-slide-right" style="animation-delay: 0.4s;">
-                    <span class="feature-icon">🧠</span>
-                    <h3>Логичная грамматика</h3>
-                    <p>Всего 3 основных правила, которые можно выучить за 5 минут.</p>
-                    <ul>
-                        <li>Множественное число: «все»</li>
-                        <li>Времена: «било» / «буду»</li>
-                        <li>Предлоги вместо падежей</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="section-title"><span id="featuresTitle"></span></div>
+            <p class="section-subtitle" id="featuresSubtitle"></p>
+            <div class="features-grid" id="featuresGrid"></div>
         </div>
     </section>
 
     <!-- СООБЩЕСТВО -->
     <section id="community">
         <div class="container">
-            <div class="section-title centered"><span>Присоединяйтесь к сообществу</span></div>
-            <p class="section-subtitle centered">Станьте частью языковой революции — изучайте, общайтесь, развивайте язык вместе с нами.</p>
-            <div class="community-grid">
-                <div class="community-card anim-fade-up-scale" style="animation-delay: 0.1s;">
-                    <span class="comm-icon">💬</span>
-                    <h3>Общайтесь</h3>
-                    <p>Присоединяйтесь к Telegram-сообществу, обсуждайте новые слова и идеи.</p>
-                    <span class="comm-link-text">Telegram-канал</span>
-                </div>
-                <div class="community-card anim-fade-up-scale" style="animation-delay: 0.25s;">
-                    <span class="comm-icon">🎥</span>
-                    <h3>Смотрите</h3>
-                    <p>Обучающие видео на YouTube — освойте язык быстро и наглядно.</p>
-                    <span class="comm-link-text">YouTube-канал</span>
-                </div>
-                <div class="community-card anim-fade-up-scale" style="animation-delay: 0.4s;">
-                    <span class="comm-icon">📚</span>
-                    <h3>Изучайте</h3>
-                    <p>Освойте язык за 5 минут с нашими материалами и алфавитом.</p>
-                    <span class="comm-link-text">Начать изучение</span>
-                </div>
-            </div>
+            <div class="section-title centered"><span id="communityTitle"></span></div>
+            <p class="section-subtitle centered" id="communitySubtitle"></p>
+            <div class="community-grid" id="communityGrid"></div>
         </div>
     </section>
 
     <!-- FAQ -->
     <section id="faq">
         <div class="container">
-            <div class="section-title centered"><span>Вопросы и ответы</span></div>
-            <p class="section-subtitle centered">Всё, что вы хотели знать о Сибилевце.</p>
-            <div class="faq-list">
-                <details class="faq-item anim-fade-up" style="animation-delay: 0.05s;">
-                    <summary>Что такое Сибилевец?</summary>
-                    <div class="faq-answer">
-                        <p>Сибилевец — это упрощённый вариант русского языка, созданный для лёгкого общения. Он сохраняет основу русского, но убирает сложные грамматические правила.</p>
-                    </div>
-                </details>
-                <details class="faq-item anim-fade-up" style="animation-delay: 0.1s;">
-                    <summary>Чем Сибилевец отличается от русского?</summary>
-                    <div class="faq-answer">
-                        <p>Основные отличия:</p>
-                        <ul>
-                            <li>Нет падежей и спряжений</li>
-                            <li>31 буква с чёткими звуками</li>
-                            <li>3 простых правила грамматики</li>
-                            <li>Слова не меняются</li>
-                        </ul>
-                    </div>
-                </details>
-                <details class="faq-item anim-fade-up" style="animation-delay: 0.15s;">
-                    <summary>Почему в алфавите есть латинская I?</summary>
-                    <div class="faq-answer">
-                        <p>Для чистоты принципа «пишем как слышим»:</p>
-                        <ul>
-                            <li><strong>I</strong> (латиница) — звук [и] как в «мир»</li>
-                            <li><strong>И</strong> (кириллица) — звук [ɨ] как в «мышь»</li>
-                        </ul>
-                        <p>Так каждый звук получает свою уникальную букву.</p>
-                    </div>
-                </details>
-                <details class="faq-item anim-fade-up" style="animation-delay: 0.2s;">
-                    <summary>Кто может использовать Сибилевец?</summary>
-                    <div class="faq-answer">
-                        <p>Все, кто хочет упростить общение:</p>
-                        <ul>
-                            <li>Иностранцы, изучающие русский</li>
-                            <li>Дети и подростки</li>
-                            <li>Все, кто ценит простоту и ясность</li>
-                        </ul>
-                    </div>
-                </details>
-                <details class="faq-item anim-fade-up" style="animation-delay: 0.25s;">
-                    <summary>Сколько правил в грамматике?</summary>
-                    <div class="faq-answer">
-                        <p>Всего <strong>3 основных правила</strong>:</p>
-                        <ul>
-                            <li>Слова не меняются</li>
-                            <li>Множественное число = «все»</li>
-                            <li>Время глагола = «било» / «буду»</li>
-                        </ul>
-                    </div>
-                </details>
-                <details class="faq-item anim-fade-up" style="animation-delay: 0.3s;">
-                    <summary>Как предложить новое слово?</summary>
-                    <div class="faq-answer">
-                        <p>Присоединяйтесь к нашему Telegram-сообществу и предлагайте слова в обсуждениях! Каждое предложение рассматривается.</p>
-                    </div>
-                </details>
-            </div>
+            <div class="section-title centered"><span id="faqTitle"></span></div>
+            <p class="section-subtitle centered" id="faqSubtitle"></p>
+            <div class="faq-list" id="faqList"></div>
         </div>
     </section>
 
     <!-- КОНТАКТЫ -->
     <section id="contacts">
         <div class="container">
-            <div class="contact-box anim-fade-up-scale">
-                <div class="section-title centered"><span>Свяжитесь с нами</span></div>
-                <p style="font-size:1.1rem;max-width:580px;margin:0 auto 26px;color:var(--text-secondary);">
-                    Готовы обсудить проект или предложить идею для развития языка? Мы всегда на связи!
-                </p>
-                <a href="#community" class="contact-btn">Написать сообщение</a>
+            <div class="contact-box anim-fade-up-scale" id="contactBox">
+                <div class="section-title centered"><span id="contactTitle"></span></div>
+                <p style="font-size:1.1rem;max-width:580px;margin:0 auto 26px;color:var(--text-secondary);" id="contactText"></p>
+                <a href="# Chest" class="contact-btn" id="contactBtn"></a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Сибилевец. Все права защищены. Язык будущего уже здесь. &nbsp;|&nbsp;
-            <a href="https://timoshamoscow.github.io/sibylevec-site.github.io/" target="_blank" rel="noopener">Оригинальный сайт</a>
-        </p>
-    </footer>
+    <footer id="footerText"></footer>
 
     <script>
-        const header = document.getElementById('site-header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        // ======================= ВЕСЬ ТЕКСТ САЙТА РЕДАКТИРУЙТЕ ЗДЕСЬ =======================
+        const SITE_TEXT = {
+            brandName: "Сибилевец 2",
+            navLinks: [
+                { text: "О проекте", href: "#about" },
+                { text: "Алфавит", href: "#alphabet" },
+                { text: "Особенности", href: "#features" },
+                { text: "Сообщество", href: "#community" },
+                { text: "Вопросы", href: "#faq" },
+                { text: "Контакты", href: "#contacts" }
+            ],
+            heroBadge: "🚀 Язык будущего",
+            heroTitle: "Сибилевец 2",
+            heroSubtitleHTML: `Простой, логичный, современный. Этот язык является основным на проекте <a href="https://timoshamoscow.github.io/sibylevec-site.github.io/" target="_blank" rel="noopener">Сибилевец 2</a> и основан на русском языке. Никаких падежей, только понятные правила и интуитивный алфавит.`,
+            heroStats: [
+                { number: "3", label: "правила грамматики" },
+                { number: "31", label: "букв в алфавите" },
+                { number: "5", label: "минут на изучение" }
+            ],
+            heroBtn: "Узнать больше",
 
-        const allDetails = document.querySelectorAll('.faq-item');
-        allDetails.forEach(detail => {
-            detail.addEventListener('toggle', function() {
-                if (this.open) {
-                    allDetails.forEach(other => {
-                        if (other !== this && other.open) {
-                            other.open = false;
-                        }
-                    });
+            aboutTitle: "О проекте",
+            aboutSubtitle: "Инновационный подход к языку — максимальная простота без потери смысла.",
+            aboutCards: [
+                { icon: "🎯", title: "Миссия", text: "Создать максимально простой и логичный язык для повседневного общения, доступный каждому." },
+                { icon: "💡", title: "Философия", text: "«Пишем как слышим, думаем как говорим» — основа понятной и интуитивной коммуникации." },
+                { icon: "🚀", title: "Достижения", text: "Первый в поиске Google, скорость загрузки 100/100, профессиональная реализация на всех устройствах." }
+            ],
+
+            alphabetTitle: "Упрощённый алфавит",
+            alphabetSubtitle: "31 буква, каждая обозначает один звук. Чёткое произношение без исключений.",
+            alphabetLetters: ["А","Б","В","Г","Д","Е","Ё","Ж","З","I","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"],
+
+            featuresTitle: "Особенности языка",
+            featuresSubtitle: "Что делает Сибилевец уникальным и невероятно простым.",
+            featuresCards: [
+                {
+                    icon: "📖",
+                    title: "Упрощённый алфавит",
+                    text: "31 буква, каждая обозначает один звук. Чёткое произношение без исключений.",
+                    list: ["Звук [и] пишется как I", "Звук [ɨ] пишется как И", "Логичные замены сложных звуков"]
+                },
+                {
+                    icon: "🔄",
+                    title: "Отсутствие падежей",
+                    text: "Слова не меняются по падежам, родам и числам. Одна форма — навсегда.",
+                    list: ["Никаких склонений", "Постоянная форма слов", "Простота использования"]
+                },
+                {
+                    icon: "🧠",
+                    title: "Логичная грамматика",
+                    text: "Всего 3 основных правила, которые можно выучить за 5 минут.",
+                    list: ["Множественное число: «все»", "Времена: «било» / «буду»", "Предлоги вместо падежей"]
                 }
-            });
-        });
+            ],
 
-        const observerOptions = {
-            threshold: 0.12,
-            rootMargin: '0px 0px -30px 0px'
+            communityTitle: "Присоединяйтесь к сообществу",
+            communitySubtitle: "Станьте частью языковой революции — изучайте, общайтесь, развивайте язык вместе с нами.",
+            communityCards: [
+                { icon: "💬", title: "Общайтесь", text: "Присоединяйтесь к Telegram-сообществу, обсуждайте новые слова и идеи.", linkText: "Telegram-канал" },
+                { icon: "🎥", title: "Смотрите", text: "Обучающие видео на YouTube — освойте язык быстро и наглядно.", linkText: "YouTube-канал" },
+                { icon: "📚", title: "Изучайте", text: "Освойте язык за 5 минут с нашими материалами и алфавитом.", linkText: "Начать изучение" }
+            ],
+
+            faqTitle: "Вопросы и ответы",
+            faqSubtitle: "Всё, что вы хотели знать о Сибилевце.",
+            faqItems: [
+                {
+                    question: "Что такое Сибилевец?",
+                    answer: "<p>Сибилевец — это упрощённый вариант русского языка, созданный для лёгкого общения. Он сохраняет основу русского, но убирает сложные грамматические правила.</p>"
+                },
+                {
+                    question: "Чем Сибилевец отличается от русского?",
+                    answer: `<p>Основные отличия:</p>
+                     <ul><li>Нет падежей и спряжений</li><li>31 буква с чёткими звуками</li><li>3 простых правила грамматики</li><li>Слова не меняются</li></ul>`
+                },
+                {
+                    question: "Почему в алфавите есть латинская I?",
+                    answer: `<p>Для чистоты принципа «пишем как слышим»:</p>
+                     <ul><li><strong>I</strong> (латиница) — звук [и] как в «мир»</li><li><strong>И</strong> (кириллица) — звук [ɨ] как в «мышь»</li></ul>
+                     <p>Так каждый звук получает свою уникальную букву.</p>`
+                },
+                {
+                    question: "Кто может использовать Сибилевец?",
+                    answer: `<p>Все, кто хочет упростить общение:</p>
+                     <ul><li>Иностранцы, изучающие русский</li><li>Дети и подростки</li><li>Все, кто ценит простоту и ясность</li></ul>`
+                },
+                {
+                    question: "Сколько правил в грамматике?",
+                    answer: `<p>Всего <strong>3 основных правила</strong>:</p>
+                     <ul><li>Слова не меняются</li><li>Множественное число = «все»</li><li>Время глагола = «било» / «буду»</li></ul>`
+                },
+                {
+                    question: "Как предложить новое слово?",
+                    answer: "<p>Присоединяйтесь к нашему Telegram-сообществу и предлагайте слова в обсуждениях! Каждое предложение рассматривается.</p>"
+                }
+            ],
+
+            contactTitle: "Свяжитесь с нами",
+            contactText: "Готовы обсудить проект или предложить идею для развития языка? Мы всегда на связи!",
+            contactBtn: "Написать сообщение",
+
+            footerHTML: `&copy; 2026 Сибилевец 2. Все права защищены. Язык будущего уже здесь. &nbsp;|&nbsp;
+            <a href="https://timoshamoscow.github.io/sibylevec-site.github.io/" target="_blank" rel="noopener">Оригинальный сайт</a>`
         };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+
+        // ======================= ЗАПОЛНЕНИЕ КОНТЕНТА =======================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Бренд
+            document.getElementById('brandName').textContent = SITE_TEXT.brandName;
+
+            // Навигация
+            const nav = document.getElementById('mainNav');
+            SITE_TEXT.navLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.text;
+                nav.appendChild(a);
+            });
+
+            // Hero
+            document.getElementById('heroBadge').textContent = SITE_TEXT.heroBadge;
+            document.getElementById('heroTitle').textContent = SITE_TEXT.heroTitle;
+            document.getElementById('heroSubtitle').innerHTML = SITE_TEXT.heroSubtitleHTML;
+            document.getElementById('heroBtn').textContent = SITE_TEXT.heroBtn;
+
+            const statsContainer = document.getElementById('heroStatsContainer');
+            SITE_TEXT.heroStats.forEach((stat, index) => {
+                const div = document.createElement('div');
+                div.className = 'hero-stat';
+                div.style.animationDelay = (0.5 + index * 0.1) + 's';
+                div.innerHTML = `<span class="stat-number">${stat.number}</span><span class="stat-label">${stat.label}</span>`;
+                statsContainer.appendChild(div);
+            });
+
+            // О проекте
+            document.getElementById('aboutTitle').textContent = SITE_TEXT.aboutTitle;
+            document.getElementById('aboutSubtitle').textContent = SITE_TEXT.aboutSubtitle;
+            const aboutGrid = document.getElementById('aboutGrid');
+            SITE_TEXT.aboutCards.forEach((card, i) => {
+                const div = document.createElement('div');
+                div.className = 'about-card anim-fade-up-scale';
+                div.style.animationDelay = (0.1 + i * 0.15) + 's';
+                div.innerHTML = `
+                    <div class="icon-circle">${card.icon}</div>
+                    <h3>${card.title}</h3>
+                    <p>${card.text}</p>
+                `;
+                aboutGrid.appendChild(div);
+            });
+
+            // Алфавит
+            document.getElementById('alphabetTitle').textContent = SITE_TEXT.alphabetTitle;
+            document.getElementById('alphabetSubtitle').textContent = SITE_TEXT.alphabetSubtitle;
+            const alphabetGrid = document.getElementById('alphabetGrid');
+            SITE_TEXT.alphabetLetters.forEach(letter => {
+                const div = document.createElement('div');
+                div.className = 'letter';
+                div.innerHTML = `<span>${letter}</span>`;
+                alphabetGrid.appendChild(div);
+            });
+
+            // Особенности
+            document.getElementById('featuresTitle').textContent = SITE_TEXT.featuresTitle;
+            document.getElementById('featuresSubtitle').textContent = SITE_TEXT.featuresSubtitle;
+            const featuresGrid = document.getElementById('featuresGrid');
+            const featureAnimClasses = ['anim-slide-left', 'anim-fade-up-scale', 'anim-slide-right'];
+            SITE_TEXT.featuresCards.forEach((card, i) => {
+                const div = document.createElement('div');
+                div.className = `feature-card ${featureAnimClasses[i] || 'anim-fade-up-scale'}`;
+                div.style.animationDelay = (0.1 + i * 0.15) + 's';
+                let listHTML = '';
+                if (card.list) {
+                    listHTML = '<ul>' + card.list.map(item => `<li>${item}</li>`).join('') + '</ul>';
+                }
+                div.innerHTML = `
+                    <span class="feature-icon">${card.icon}</span>
+                    <h3>${card.title}</h3>
+                    <p>${card.text}</p>
+                    ${listHTML}
+                `;
+                featuresGrid.appendChild(div);
+            });
+
+            // Сообщество
+            document.getElementById('communityTitle').textContent = SITE_TEXT.communityTitle;
+            document.getElementById('communitySubtitle').textContent = SITE_TEXT.communitySubtitle;
+            const communityGrid = document.getElementById('communityGrid');
+            SITE_TEXT.communityCards.forEach((card, i) => {
+                const div = document.createElement('div');
+                div.className = 'community-card anim-fade-up-scale';
+                div.style.animationDelay = (0.1 + i * 0.15) + 's';
+                div.innerHTML = `
+                    <span class="comm-icon">${card.icon}</span>
+                    <h3>${card.title}</h3>
+                    <p>${card.text}</p>
+                    <span class="comm-link-text">${card.linkText}</span>
+                `;
+                communityGrid.appendChild(div);
+            });
+
+            // FAQ
+            document.getElementById('faqTitle').textContent = SITE_TEXT.faqTitle;
+            document.getElementById('faqSubtitle').textContent = SITE_TEXT.faqSubtitle;
+            const faqList = document.getElementById('faqList');
+            SITE_TEXT.faqItems.forEach((item, i) => {
+                const details = document.createElement('details');
+                details.className = 'faq-item anim-fade-up';
+                details.style.animationDelay = (0.05 + i * 0.05) + 's';
+                details.innerHTML = `
+                    <summary>${item.question}</summary>
+                    <div class="faq-answer">${item.answer}</div>
+                `;
+                faqList.appendChild(details);
+            });
+
+            // Контакты
+            document.getElementById('contactTitle').textContent = SITE_TEXT.contactTitle;
+            document.getElementById('contactText').textContent = SITE_TEXT.contactText;
+            document.getElementById('contactBtn').textContent = SITE_TEXT.contactBtn;
+
+            // Футер
+            document.getElementById('footerText').innerHTML = SITE_TEXT.footerHTML;
+
+            // Перепривязка событий FAQ (аккордеон)
+            const allDetails = document.querySelectorAll('.faq-item');
+            allDetails.forEach(detail => {
+                detail.addEventListener('toggle', function() {
+                    if (this.open) {
+                        allDetails.forEach(other => {
+                            if (other !== this && other.open) {
+                                other.open = false;
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Скролл-эффект хедера
+            const header = document.getElementById('site-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.about-card, .feature-card, .community-card, .faq-item, .hero-stat, .letter').forEach(el => {
-            observer.observe(el);
         });
     </script>
 </body>
