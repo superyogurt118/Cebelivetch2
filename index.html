@@ -47,7 +47,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(155deg, #08080c 0%, #0b131b 45%, #0d1720 75%, #0a1018 100%);
+            background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
@@ -125,17 +125,6 @@
                 transform: translateY(-10px);
             }
         }
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
 
         .anim-fade-up {
             animation: fadeUp 0.8s ease-out both;
@@ -159,7 +148,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(8, 8, 12, 0.75);
+            background: rgba(8, 8, 12, 0.78);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             position: fixed;
@@ -173,7 +162,7 @@
         header.scrolled {
             box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
             padding: 10px 40px;
-            background: rgba(8, 8, 12, 0.88);
+            background: rgba(8, 8, 12, 0.9);
         }
 
         .brand-container {
@@ -323,7 +312,6 @@
             color: #fff;
         }
 
-        /* Статистика */
         .hero-stats {
             display: flex;
             gap: 28px;
@@ -1006,7 +994,7 @@
             <div class="contact-box anim-fade-up-scale" id="contactBox">
                 <div class="section-title centered"><span id="contactTitle"></span></div>
                 <p style="font-size:1.1rem;max-width:580px;margin:0 auto 26px;color:var(--text-secondary);" id="contactText"></p>
-                <a href="# Chest" class="contact-btn" id="contactBtn"></a>
+                <a href="#community" class="contact-btn" id="contactBtn">Написать сообщение</a>
             </div>
         </div>
     </section>
@@ -1027,7 +1015,7 @@
             ],
             heroBadge: "🚀 Язык будущего",
             heroTitle: "Сибилевец 2",
-            heroSubtitleHTML: `Простой, логичный, современный. Этот язык является основным на проекте <a href="https://timoshamoscow.github.io/sibylevec-site.github.io/" target="_blank" rel="noopener">Сибилевец 2</a> и основан на русском языке. Никаких падежей, только понятные правила и интуитивный алфавит.`,
+            heroSubtitleHTML: `Простой, логичный, современный. Этот язык является основным на проекте <a href="https://timoshamoscow.github.io/sibylevec-site.github.io/" target="_blank" rel="noopener">Сибилевец</a> и основан на русском языке. Никаких падежей, только понятные правила и интуитивный алфавит.`,
             heroStats: [
                 { number: "3", label: "правила грамматики" },
                 { number: "31", label: "букв в алфавите" },
