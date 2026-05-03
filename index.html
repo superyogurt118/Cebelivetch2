@@ -3,91 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сибилевец 2</title>
+    <title>Сибилевец 2 — Светлый стиль</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Сброс стилей */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* СБРОС И БАЗОВЫЕ СТИЛИ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background-color: #050505; /* Глубокий черный фон, подходящий для логотипа */
-            color: #ffffff;
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            background-color: #ffffff; /* Чистый белый фон */
+            color: #111111;
+            line-height: 1.6;
         }
 
-        /* Переменные цветов, взятые с логотипа */
+        /* ПЕРЕМЕННЫЕ ЦВЕТОВ (светлая версия) */
         :root {
-            --cyan: #1DE9B6;
-            --blue-light: #42A5F5;
-            --blue-dark: #1E88E5;
+            --cyan: #00CCA0; /* Более мягкий циан для белого фона */
+            --blue-light: #4A90E2;
+            --blue-dark: #2C6FB7;
             --gradient-main: linear-gradient(135deg, var(--cyan), var(--blue-dark));
-            --gradient-transparent: linear-gradient(135deg, rgba(29, 233, 182, 0.5), rgba(30, 136, 229, 0.5));
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
-        /* Анимация появления */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* АНИМАЦИИ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        .animate-fade {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        .animate-fade-delay {
-            animation: fadeInUp 1s ease-out 0.3s forwards;
-            opacity: 0; /* Начальное скрытие */
-        }
-
-        /* Навигация и Логотип */
+        /* ХЕДЕР */
         header {
             padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            background: rgba(5, 5, 5, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed; /* Фиксация */
+            top: 0; width: 100%; z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            animation: fadeUp 0.8s ease-out;
         }
 
         .brand-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .logo-img {
-            height: 50px;
-            width: auto;
-            transition: transform 0.3s ease;
+            height: 48px;
+            filter: drop-shadow(0 2px 10px rgba(30, 136, 229, 0.3)); /* Добавляет свечение логотипу на белом фоне */
+            transition: transform 0.3s;
         }
-
-        .logo-img:hover {
-            transform: scale(1.05) rotate(-2deg);
-        }
+        .logo-img:hover { transform: scale(1.05); }
 
         .brand-title {
-            font-size: 1.5rem;
-            font-weight: 900;
-            /* Градиентный текст */
+            font-size: 1.6rem;
+            font-weight: 900; /* Жирный шрифт */
+            letter-spacing: -0.5px;
             background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -95,18 +78,27 @@
         }
 
         nav a {
-            color: #a0a0a0;
+            font-weight: 700; /* Жирный для навигации */
+            color: #333;
             text-decoration: none;
-            margin-left: 20px;
+            margin-left: 30px;
+            position: relative;
             transition: 0.3s;
-            font-weight: 400;
         }
-
-        nav a:hover {
-            color: var(--cyan);
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient-main);
+            transition: 0.3s;
         }
+        nav a:hover { color: var(--blue-dark); }
+        nav a:hover::after { width: 100%; }
 
-        /* Герой-секция */
+        /* ГЕРОЙ (ГЛАВНАЯ) */
         .hero {
             height: 100vh;
             display: flex;
@@ -114,139 +106,273 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 100px 20px 0;
+            background: linear-gradient(180deg, #f5faff 0%, #ffffff 100%); /* Мягкий градиент фона */
         }
 
         h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            /* Прозрачный градиент на фоне */
-            background: var(--gradient-transparent);
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: var(--gradient-main);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
+            animation: scaleUp 1s ease-out 0.2s both;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            max-width: 600px;
-            color: #b0b0b0;
-            margin-bottom: 40px;
-            line-height: 1.6;
+            font-size: 1.4rem;
+            max-width: 700px;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 50px;
+            animation: fadeUp 1s ease-out 0.4s both;
         }
 
-        .btn-glow {
+        .btn-primary {
             display: inline-block;
-            padding: 15px 40px;
-            border-radius: 50px;
+            padding: 16px 50px;
+            border-radius: 60px;
+            font-weight: 900;
             text-decoration: none;
+            background: #111;
             color: #fff;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow);
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.02);
             background: var(--gradient-main);
-            font-weight: 700;
-            box-shadow: 0 0 15px rgba(29, 233, 182, 0.3);
-            transition: all 0.3s ease;
+            color: #fff;
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
         }
 
-        .btn-glow:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(29, 233, 182, 0.6);
+        /* СЕКЦИИ */
+        section { padding: 100px 20px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* Секция "О проекте" с эффектом стекла */
-        .section-about {
-            padding: 100px 20px;
-            display: flex;
-            justify-content: center;
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .section-title span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-main);
+            margin-top: 10px;
+        }
+        .section-title.centered { text-align: center; }
+        .section-title.centered::after { margin: 10px auto 0; }
+
+        .text-body {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 40px;
+            max-width: 900px;
         }
 
-        .glass-card {
-            max-width: 800px;
+        /* КАРТОЧКИ ПРОЕКТОВ */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: #f8f9fe;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            /* Прозрачный градиент для бордера или фона */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            transition: 0.4s;
+            border: 1px solid transparent;
+            animation: fadeUp 0.8s ease-out both;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(74, 144, 226, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+        .project-card h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .project-card p { color: #666; font-weight: 400; }
+
+        /* АЛФАВИТ */
+        .alphabet-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 40px 0;
+        }
+        .letter {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            border-radius: 16px;
+            background: #ffffff;
+            color: #111;
+            border: 2px solid #eee;
+            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+        }
+        .letter:hover {
+            transform: scale(1.15) rotate(-5deg);
+            background: #111;
+            color: #fff;
+            border-color: #111;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* КОНТАКТЫ */
+        .contact-box {
+            background: #f8f9fe;
+            padding: 80px;
+            border-radius: 40px;
             text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .contact-btn {
+            display: inline-block;
+            padding: 18px 60px;
+            border-radius: 60px;
+            background: #111;
+            color: #fff;
+            font-weight: 900;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .contact-btn:hover {
+            background: var(--gradient-main);
+            transform: scale(1.05);
         }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(145deg, var(--blue-light), var(--cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Контакты */
-        .section-contacts {
-            padding: 80px 20px;
+        /* ФУТЕР */
+        footer {
             text-align: center;
+            padding: 40px;
+            color: #777;
+            border-top: 1px solid #eee;
+            font-weight: 400;
         }
 
-        .bottom-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            /* Текст с градиентом */
-            background: linear-gradient(to right, var(--cyan), var(--blue-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Адаптивность */
+        /* АДАПТИВ */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .brand-title { font-size: 1.2rem; }
-            header { padding: 15px 20px; flex-direction: column; gap: 10px; }
-            .logo-img { height: 40px; }
+            h1 { font-size: 3rem; }
+            header { flex-direction: column; gap: 15px; padding: 15px; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            nav a { margin: 0 10px; }
+            .contact-box { padding: 30px; }
+            .letter { width: 55px; height: 55px; font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand-container animate-fade">
-            <!-- ЛОГОТИП ИЗ ПЕРЕМЕННОЙ logo.png -->
+        <div class="brand-container">
+            <!-- ЛОГОТИП -->
             <img src="logo.png" alt="Логотип Сибилевец 2" class="logo-img">
             <span class="brand-title">Сибилевец 2</span>
         </div>
-        <nav class="animate-fade-delay">
+        <nav>
             <a href="#about">О проекте</a>
+            <a href="#alphabet">Алфавит</a>
+            <a href="#projects">Проекты</a>
             <a href="#contacts">Контакты</a>
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1 class="animate-fade">Сибилевец 2</h1>
-            <p class="hero-subtitle animate-fade-delay">
-                Новое поколение возможностей. Современный дизайн с использованием прозрачных градиентов, 
-                инновационных решений и анимации.
-            </p>
-            <a href="#about" class="btn-glow animate-fade-delay" style="animation-delay: 0.6s;">Узнать больше</a>
-        </section>
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+        <h1>Сибилевец 2</h1>
+        <p class="hero-subtitle">Новый уровень цифровых решений. Современный минимализм, смелые анимации и жирный шрифт в каждой детали.</p>
+        <a href="#projects" class="btn-primary">Смотреть портфолио</a>
+    </section>
 
-        <section id="about" class="section-about animate-fade">
-            <div class="glass-card">
-                <h2>О проекте</h2>
-                <p style="color: #ddd; line-height: 1.8;">
-                    Добро пожаловать в новый этап развития! Мы убрали все лишние инициалы и сосредоточились 
-                    на главном — чистоте кода, визуальном стиле и удобстве. Наш сайт использует технологии 
-                    градиентов с прозрачностью (alpha-каналы) для создания глубины и эффекта свечения, 
-                    вдохновленного вашим логотипом.
-                </p>
+    <!-- О ПРОЕКТЕ -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title"><span>О проекте</span></div>
+            <div class="text-body">
+                <p>Мы создали этот сайт, чтобы показать мощь чистого дизайна и современных технологий. В отличие от темных тем, белый фон позволяет концентрироваться на содержании, подчеркивая яркость логотипа и текстовых акцентов.</p>
+                <p>Здесь вы найдете русский алфавит, стилизованный в виде уникальных плашек, и серию проектов, демонстрирующих наш подход к делу. «Сибилевец 2» — это обновленная версия себя.</p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contacts" class="section-contacts animate-fade-delay">
-            <div class="bottom-title">Свяжитесь с нами</div>
-            <p style="color: #888; max-width: 500px; margin: 0 auto;">
-                Всегда открыты к сотрудничеству и новым идеям. Мы — команда «Сибилевец 2».
-            </p>
-        </section>
-    </main>
+    <!-- АЛФАВИТ -->
+    <section id="alphabet">
+        <div class="container">
+            <div class="section-title centered"><span>Русский алфавит</span></div>
+            <div class="alphabet-grid">
+                <!-- 33 буквы -->
+                <div class="letter">А</div><div class="letter">Б</div><div class="letter">В</div><div class="letter">Г</div>
+                <div class="letter">Д</div><div class="letter">Е</div><div class="letter">Ё</div><div class="letter">Ж</div>
+                <div class="letter">З</div><div class="letter">И</div><div class="letter">Й</div><div class="letter">К</div>
+                <div class="letter">Л</div><div class="letter">М</div><div class="letter">Н</div><div class="letter">О</div>
+                <div class="letter">П</div><div class="letter">Р</div><div class="letter">С</div><div class="letter">Т</div>
+                <div class="letter">У</div><div class="letter">Ф</div><div class="letter">Х</div><div class="letter">Ц</div>
+                <div class="letter">Ч</div><div class="letter">Ш</div><div class="letter">Щ</div><div class="letter">Ъ</div>
+                <div class="letter">Ы</div><div class="letter">Ь</div><div class="letter">Э</div><div class="letter">Ю</div>
+                <div class="letter">Я</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРОЕКТЫ -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title"><span>Наши проекты</span></div>
+            <div class="projects-grid">
+                <div class="project-card" style="animation-delay: 0.1s;">
+                    <h3>Лендинг "C2"</h3>
+                    <p>Современный промо-сайт с использованием градиентов и анимации на чистом CSS.</p>
+                </div>
+                <div class="project-card" style="animation-delay: 0.2s;">
+                    <h3>Алфавит-конструктор</h3>
+                    <p>Интерактивный модуль для изучения букв с визуальными эффектами.</p>
+                </div>
+                <div class="project-card" style="animation-delay: 0.3s;">
+                    <h3>Дизайн-система</h3>
+                    <p>Набор ui-компонентов с жирными шрифтами и светлой темой.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contacts">
+        <div class="container">
+            <div class="contact-box">
+                <div class="section-title centered"><span>Свяжитесь с нами</span></div>
+                <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px;">Готовы обсудить ваш проект или просто поболтать о дизайне? Мы всегда на связи!</p>
+                <a href="#" class="contact-btn">Написать сообщение</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Сибилевец 2. Все права защищены.</p>
+    </footer>
 
 </body>
 </html>
